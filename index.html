@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Host - LAUNCH Your Dream Minecraft Server!</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Orbitron:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons (Replace with your preferred version/CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7y/j/yYJz2Y1C+2lG1N5bT0v5d+e3Wv0UuP9wIeN+tCqX+cQ/v2K9tq/w6y+b1e9Y/4+sV/n5r/Bv+j00b0==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* --- Global Styles & Variables --- */
+        :root {
+            --primary-color: #00ffff; /* Cyan */
+            --secondary-color: #ff00ff; /* Magenta */
+            --accent-color: #ffff00; /* Yellow */
+            --dark-background: #0a0a1a; /* Deeper space dark */
+            --card-background: #1a1a2e; /* Slightly lighter for cards */
+            --text-color: #e0e0e0;
+            --heading-font: 'Orbitron', sans-serif;
+            --body-font: 'Exo 2', sans-serif;
+            --title-font: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--body-font);
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--dark-background);
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .container {
+            max-width: 1280px; /* Slightly wider */
+            margin: 0 auto;
+            padding: 0 30px; /* More padding */
+        }
+
+        h1, h2, h3 {
+            font-family: var(--heading-font);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3), 0 0 20px rgba(255, 0, 255, 0.2);
+        }
+
+        h1 { font-size: 3.5em; color: #ffffff; }
+        h2 { font-size: 2.8em; text-align: center; color: var(--accent-color); }
+        h3 { font-size: 2em; color: var(--secondary-color); }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 100px 0; /* More vertical padding */
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(10, 10, 26, 0.9), rgba(26, 0, 36, 0.9)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Updated background */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            min-height: 85vh; /* Taller hero */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            position: relative;
+            overflow: hidden; /* For potential future animations */
+        }
+
+        .hero-section::before { /* Adding a subtle gradient overlay */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 0, 255, 0.1), rgba(0, 255, 255, 0.1));
+            opacity: 0.4;
+            z-index: 1;
+        }
+
+        .hero-content { /* Wrapper for content to position above overlay */
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-family: var(--title-font);
+            font-size: 4.5em; /* Larger title */
+            margin-bottom: 25px;
+            line-height: 1.1;
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(255, 0, 255, 0.4);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5em;
+            max-width: 750px;
+            margin: 0 auto 50px auto;
+            color: #f0f0f0;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            color: #ffffff;
+            padding: 18px 40px; /* Larger button */
+            border-radius: 8px; /* Rounded corners */
+            font-size: 1.3em;
+            font-weight: 700; /* Bold title font */
+            text-transform: uppercase;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 0, 255, 0.3);
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); /* Reverse gradient */
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.5);
+        }
+
+        /* --- Credit System Section --- */
+        .credit-system-section {
+            background: linear-gradient(180deg, var(--card-background) 0%, var(--dark-background) 100%);
+            text-align: center;
+        }
+
+        .credit-system-section h2 {
+            color: #ffffff;
+            margin-bottom: 60px;
+        }
+
+        .credit-value {
+            font-size: 2.2em;
+            font-weight: 700; /* Bold title font */
+            color: var(--accent-color);
+            margin-bottom: 50px;
+            text-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
+        }
+
+        .credit-features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .credit-feature-item {
+            flex: 1;
+            min-width: 280px;
+            max-width: 320px;
+            background-color: rgba(26, 0, 36, 0.5); /* More distinct card background */
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+        }
+
+        .credit-feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, rgba(26, 0, 36, 0.6), rgba(10, 10, 26, 0.6));
+        }
+
+        .credit-feature-item i {
+            font-size: 3.5em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite; /* Subtle pulse animation */
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .credit-feature-item h3 {
+            margin-bottom: 15px;
+            color: #ffffff;
+            font-size: 1.8em;
+        }
+
+        .credit-feature-item p {
+            font-size: 1.1em;
+            color: #c0c0c0;
+        }
+
+        /* --- Server Plans Section --- */
+        .server-plans-section {
+            background: linear-gradient(180deg, var(--dark-background) 0%, var(--card-background) 100%);
+        }
+
+        .server-plans-section h2 {
+            margin-bottom: 60px;
+        }
+
+        .plan-cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .plan-card {
+            background-color: rgba(26, 0, 36, 0.6);
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            width: 320px; /* Slightly larger cards */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border-top: 7px solid; /* Thicker border */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card::before { /* Adding a subtle glow effect */
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05), transparent 70%);
+            transition: all 0.7s ease;
+            transform: scale(0);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .plan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .plan-card:hover::before {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .plan-card h3 {
+            margin-bottom: 15px;
+            font-size: 2.2em;
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .plan-card .price {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+        }
+
+        .plan-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+            text-align: left; /* Align list to left */
+            display: inline-block; /* To center the list block */
+        }
+
+        .plan-card ul li {
+            margin-bottom: 12px;
+            font-size: 1.15em;
+            position: relative;
+            padding-left: 25px; /* Space for icon */
+        }
+
+        .plan-card ul li::before { /* Adding checkmark icons */
+            content: '\f00c'; /* Font Awesome checkmark */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900; /* Solid style */
+            position: absolute;
+            left: 0;
+            top: 1px;
+            color: var(--secondary-color);
+            font-size: 0.9em;
+        }
+
+        .plan-card .target-audience {
+            font-size: 0.95em;
+            color: #c0c0c0;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .btn-select-plan {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: var(--dark-background); /* Dark text on bright button */
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .btn-select-plan:hover {
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color)); /* Reverse gradient */
+            color: #ffffff; /* White text on hover */
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 0, 255, 0.5);
+        }
+
+        /* Plan-specific colors */
+        .plan-card.coal { border-color: #808080; }
+        .plan-card.iron { border-color: #a9a9a9; }
+        .plan-card.redstone { border-color: #ff4500; } /* Orange-red */
+        .plan-card.gold { border-color: #ffd700; } /* Gold */
+        .plan-card.diamond { border-color: #40e0d0; } /* Turquoise */
+        .plan-card.netherite { border-color: #800080; } /* Purple */
+
+        /* --- Perks Section --- */
+        .perks-section {
+            background: linear-gradient(180deg, var(--card-background) 0%, var(--dark-background) 100%);
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .perks-section h2 {
+            color: #ffffff;
+            margin-bottom: 60px;
+        }
+
+        .perks-grid { /* Using CSS Grid for a cleaner layout */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .perk-item {
+            background-color: rgba(26, 0, 36, 0.5);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .perk-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .perk-item i {
+            font-size: 3em;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+            display: inline-block; /* For transform */
+            transition: transform 0.4s ease;
+        }
+
+        .perk-item:hover i {
+            transform: scale(1.1);
+        }
+
+        .perk-item h3 {
+            font-size: 1.8em;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .perk-item p {
+            font-size: 1.1em;
+            color: #c0c0c0;
+        }
+
+        /* --- Custom Plans Section --- */
+        .custom-plans-section {
+            background: linear-gradient(180deg, var(--dark-background) 0%, var(--card-background) 100%);
+            text-align: center;
+        }
+
+        .custom-plans-section h2 {
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+
+        .custom-plans-section p {
+            font-size: 1.3em;
+            max-width: 750px;
+            margin: 0 auto 40px auto;
+            color: #d0d0d0;
+        }
+
+        /* --- Payment Info Section --- */
+        .payment-info-section {
+            background: linear-gradient(180deg, var(--card-background) 0%, var(--dark-background) 100%);
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .payment-info-section h3 {
+            font-size: 2.5em;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+            text-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
+        }
+
+        .payment-info-section p {
+            font-size: 1.2em;
+            max-width: 650px;
+            margin: 0 auto 20px auto;
+            color: #d0d0d0;
+        }
+
+        /* --- CTA Section --- */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(10, 10, 26, 0.9), rgba(26, 0, 36, 0.9)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Re-use hero background */
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            padding: 120px 0; /* Larger padding for impact */
+        }
+
+        .cta-section h2 {
+            color: #ffffff;
+            margin-bottom: 40px;
+            font-size: 3.2em;
+        }
+
+        .cta-section p {
+            font-size: 1.4em;
+            margin-bottom: 50px;
+            color: #f0f0f0;
+            text-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-section .cta-button.primary {
+            background: linear-gradient(45deg, var(--accent-color), var(--secondary-color)); /* Different gradient for primary CTA */
+            box-shadow: 0 8px 25px rgba(255, 255, 0, 0.4);
+        }
+
+        .cta-section .cta-button.primary:hover {
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            box-shadow: 0 15px 35px rgba(255, 0, 255, 0.6);
+        }
+
+        /* --- Footer --- */
+        .footer-section {
+            background-color: #05050f; /* Very dark, almost black */
+            text-align: center;
+            padding: 40px 0;
+            font-size: 1em;
+            color: #a0a0a0;
+            border-top: 1px solid rgba(255, 0, 255, 0.2); /* Subtle separator */
+        }
+
+        .footer-section nav a {
+            color: #a0a0a0;
+            margin: 0 15px;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section nav a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 1024px) {
+            h1 { font-size: 3em; }
+            h2 { font-size: 2.2em; }
+            h3 { font-size: 1.7em; }
+
+            .hero-title { font-size: 3.5em; }
+            .hero-subtitle { font-size: 1.3em; }
+            .cta-button { font-size: 1.1em; padding: 15px 30px; }
+
+            .credit-value { font-size: 1.8em; }
+
+            .plan-card { width: 90%; max-width: 350px; }
+            .plan-card ul li { font-size: 1.1em; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2em; }
+            h2 { font-size: 1.9em; }
+            h3 { font-size: 1.5em; }
+
+            .hero-section { min-height: 60vh; }
+            .hero-title { font-size: 2.8em; }
+            .hero-subtitle { font-size: 1.1em; }
+            .cta-button { font-size: 1em; padding: 12px 25px; }
+
+            .credit-features { flex-direction: column; align-items: center; }
+            .credit-feature-item { width: 90%; max-width: 350px; }
+
+            .plan-cards { flex-direction: column; align-items: center; }
+            .plan-card { width: 90%; max-width: 350px; }
+
+            section { padding: 80px 0; }
+            .cta-section { padding: 100px 0; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 0 15px; }
+            h1 { font-size: 2em; }
+            .hero-title { font-size: 2.2em; }
+            .hero-subtitle { font-size: 1em; }
+            .credit-value { font-size: 1.5em; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">🚀 Astro Host: LAUNCH Your Dream Minecraft Server! 🚀</h1>
+                <p class="hero-subtitle">Eaglercraft & Java Hosting with a REVOLUTIONARY CREDIT SYSTEM! ✨ Earn your way to an epic server - NO REAL MONEY REQUIRED!</p>
+                <a href="#plans" class="cta-button">Explore Plans</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Credit System Explanation Section -->
+    <section class="credit-system-section">
+        <div class="container">
+            <h2>Earn Your Way to an Epic Server</h2>
+            <p class="credit-value">1000 Credits = $1! 💰 Stack ‘em up & play for FREE!</p>
+            <div class="credit-features">
+                <!-- Using Font Awesome icons -->
+                <div class="credit-feature-item">
+                    <i class="fas fa-lightbulb"></i> <!-- Icon for earning/ideas -->
+                    <h3>Earn Credits</h3>
+                    <p>Effortlessly accumulate credits through various activities. Your server dreams are within reach!</p>
+                </div>
+                <div class="credit-feature-item">
+                    <i class="fas fa-trophy"></i> <!-- Icon for achievement/reward -->
+                    <h3>Play for Free</h3>
+                    <p>Redeem your hard-earned credits to host your dream server, with zero out-of-pocket cost.</p>
+                </div>
+                <div class="credit-feature-item">
+                    <i class="fas fa-chart-line"></i> <!-- Icon for growth/stacking -->
+                    <h3>Stack Up</h3>
+                    <p>The more credits you gather, the more powerful and long-lasting your server can be. Endless possibilities!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Server Plans Section -->
+    <section id="plans" class="server-plans-section">
+        <div class="container">
+            <h2>🔥 OUR COSMIC SERVER PLANS! 🔥</h2>
+            <div class="plan-cards">
+                <div class="plan-card coal">
+                    <h3>Coal ⛏️</h3>
+                    <p class="price">$1/mo</p>
+                    <ul>
+                        <li>4GB RAM</li>
+                        <li>20GB SSD</li>
+                        <li>2 Cores 🧠</li>
+                    </ul>
+                    <p class="target-audience">(Solo/Small Groups)</p>
+                    <button class="btn-select-plan">Select Plan</button>
+                </div>
+
+                <div class="plan-card iron">
+                    <h3>Iron 🛡️</h3>
+                    <p class="price">$3/mo</p>
+                    <ul>
+                        <li>6GB RAM</li>
+                        <li>20GB SSD</li>
+                        <li>2 Cores 🧠</li>
+                    </ul>
+                    <p class="target-audience">(Growing Communities)</p>
+                    <button class="btn-select-plan">Select Plan</button>
+                </div>
+
+                <div class="plan-card redstone">
+                    <h3>Redstone 💡</h3>
+                    <p class="price">$8/mo</p>
+                    <ul>
+                        <li>8GB RAM</li>
+                        <li>30GB SSD</li>
+                        <li>3 Cores 🧠</li>
+                    </ul>
+                    <p class="target-audience">(Builders/Plugins)</p>
+                    <button class="btn-select-plan">Select Plan</button>
+                </div>
+
+                <div class="plan-card gold">
+                    <h3>Gold 🌟</h3>
+                    <p class="price">$10/mo</p>
+                    <ul>
+                        <li>10GB RAM</li>
+                        <li>40GB SSD</li>
+                        <li>4 Cores 🧠</li>
+                    </ul>
+                    <p class="target-audience">(Thriving Servers/Game Modes)</p>
+                    <button class="btn-select-plan">Select Plan</button>
+                </div>
+
+                <div class="plan-card diamond">
+                    <h3>Diamond 💎</h3>
+                    <p class="price">$12/mo</p>
+                    <ul>
+                        <li>12GB RAM</li>
+                        <li>50GB SSD</li>
+                        <li>4 Cores 🧠</li>
+                    </ul>
+                    <button class="btn-select-plan">Select Plan</button>
+                </div>
+
+                <div class="plan-card netherite">
+                    <h3>Netherite 🌌</h3>
+                    <p class="price">$16/mo</p>
+                    <ul>
+                        <li>16GB RAM</li>
+                        <li>70GB SSD</li>
+                        <li>4 Cores 🧠</li>
+                    </ul>
+                    <button class="btn-select-plan">Select Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Perks/Special Features Section -->
+    <section class="perks-section">
+        <div class="container">
+            <h2>Beyond Basic Hosting: Our Cosmic Perks!</h2>
+            <div class="perks-grid">
+                <div class="perk-item">
+                    <i class="fas fa-layer-group"></i> <!-- Multi-server -->
+                    <h3>🚀 MULTI-SERVER INSTANCES! 🤯</h3>
+                    <p>Effortlessly manage and run multiple game servers from a single, powerful plan.</p>
+                </div>
+                <div class="perk-item">
+                    <i class="fas fa-puzzle-piece"></i> <!-- Customization -->
+                    <h3>💡 CUSTOM PLUGIN & MOD DEVELOPMENT ENVIRONMENT!</h3>
+                    <p>Access our robust tools to create unique gameplay experiences and tailor your server.</p>
+                </div>
+                <div class="perk-item">
+                    <i class="fas fa-star-shooting"></i> <!-- Advanced power -->
+                    <h3>🌌 ULTIMATE MULTI-SERVER POWER!</h3>
+                    <p>Unleash unparalleled performance and flexibility for your most ambitious server networks.</p>
+                </div>
+                <div class="perk-item">
+                    <i class="fas fa-atom"></i> <!-- Advanced tech -->
+                    <h3>✨ ADVANCED CUSTOM DEVELOPMENT!</h3>
+                    <p>Push the boundaries with cutting-edge tools and support for complex plugin and mod creation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Plans Section -->
+    <section class="custom-plans-section">
+        <div class="container">
+            <h2>Custom Mission Control 🚀❓</h2>
+            <p>Your vision is unique. Let us craft a tailor-made server plan that perfectly matches your dream.</p>
+            <a href="#contact" class="cta-button">Get a Custom Quote</a>
+        </div>
+    </section>
+
+    <!-- Payment/Credit Usage Section -->
+    <section class="payment-info-section">
+        <div class="container">
+            <h3>💳 PAY WITH CREDITS? 💳</h3>
+            <p>If you choose to pay with your hard-earned credits, your server plan will be charged on a <strong>WEEKLY</strong> basis. 🗓️</p>
+            <p>This ensures maximum flexibility and that you're always utilizing your credits efficiently for ongoing hosting.</p>
+        </div>
+    </section>
+
+    <!-- Call to Action (CTA) Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>🚀 READY TO BLAST OFF? 🚀</h2>
+            <p>Join the Astro Host family, start earning credits today, and launch your ultimate Minecraft server experience!</p>
+            <a href="#signup" class="cta-button primary">Join Astro Host Now!</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Astro Host. All rights reserved.</p>
+            <nav>
+                <a href="#">Terms of Service</a> |
+                <a href="#">Privacy Policy</a> |
+                <a href="#">Contact Us</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Automatically update the current year in the footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // More vibrant animations/tweaks could be added here if needed.
+        // E.g., parallax scrolling for the hero section.
+    </script>
+
+</body>
