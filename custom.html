@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astro Host - Custom Server Quote</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Orbitron:wght@400;700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7y/j/yYJz2Y1C+2lG1N5bT0v5d+e3Wv0UuP9wIeN+tCqX+cQ/v2K9tq/w6y+b1e9Y/4+sV/n5r/Bv+j00b0==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* --- Global Styles & Variables (Copy from index.html) --- */
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #ff00ff;
+            --accent-color: #ffff00;
+            --dark-background: #0a0a1a;
+            --card-background: #1a1a2e;
+            --text-color: #e0e0e0;
+            --heading-font: 'Orbitron', sans-serif;
+            --body-font: 'Exo 2', sans-serif;
+            --title-font: 'Montserrat', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--body-font); line-height: 1.7; color: var(--text-color); background-color: var(--dark-background); overflow-x: hidden; }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 30px; }
+        h1, h2, h3 { font-family: var(--heading-font); margin-bottom: 20px; letter-spacing: 1px; text-shadow: 0 0 10px rgba(0, 255, 255, 0.3), 0 0 20px rgba(255, 0, 255, 0.2); }
+        h2 { font-size: 2.8em; text-align: center; color: var(--accent-color); }
+        h3 { font-size: 2em; color: var(--secondary-color); }
+        a { color: var(--primary-color); text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; }
+        a:hover { color: #ffffff; transform: translateY(-2px); }
+        section { padding: 100px 0; }
+
+        /* --- Navigation Bar --- */
+        .navbar {
+            background-color: rgba(10, 10, 26, 0.8);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        .navbar .container { display: flex; justify-content: space-
